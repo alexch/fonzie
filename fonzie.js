@@ -26,7 +26,9 @@ if (n) {
   ];
   for (var i=0;i<atts.length;++i) {
     var a=atts[i];
-    msg += a + ": " + s.getPropertyValue(a) + "\n";
+    v = s.getPropertyValue(a);
+    if (v != "auto" && v != 'normal' && v != 'none')
+      msg += a + ": " + v + "\n";
   }
 } else {
   msg += "If you select some text, I'll tell you what font it is.\"";
