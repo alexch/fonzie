@@ -24,11 +24,19 @@ if (n) {
     "color",
     "background-color"
   ];
+  var skip_values=["auto",'normal','none','0px','rgb(0, 0, 0)','rgba(0, 0, 0, 0)','rgb(255, 255, 255)'];
   for (var i=0;i<atts.length;++i) {
     var a=atts[i];
     v = s.getPropertyValue(a);
-    if (v != "auto" && v != 'normal' && v != 'none')
+    var skip = false;
+    for (var j=0;j<skip_values.length;++j) {
+      if (v == skip_values[j]) {
+        skip = true;
+      }
+    }
+    if (!skip && !(a=="text-align" && v=="left")) {
       msg += a + ": " + v + "\n";
+    }
   }
 } else {
   msg += "If you select some text, I'll tell you what font it is.\"";
